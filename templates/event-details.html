@@ -86,6 +86,7 @@
         </div>
         <div class="col-lg-12">
           <ul class="event-list">
+            <!-- Iterate over CET events -->
             {% for college, events in scraped_data.items() %}
             <li>
               <strong>{{ college }}</strong><br>
@@ -94,6 +95,17 @@
               {{ event.strip() }}<br> <!-- Strip extra spaces or newlines -->
               {% endif %}
               {% endfor %}
+              <!-- Add link for CET events -->
+              {% if college == 'Cet' %}
+              <div class="event-buttons">
+                <a href="http://www.cet.ac.in/short-term-courses/" class="btn btn-primary" target="_blank">Link</a>
+              </div>
+              <!-- Add link for NITC events -->
+              {% elif college == 'nit' %}
+              <div class="event-buttons">
+                <a href="http://nitc.ac.in/upcoming-events" class="btn btn-primary" target="_blank">Link</a>
+              </div>
+              {% endif %}
             </li>
             {% endfor %}
           </ul>
@@ -101,6 +113,8 @@
       </div>
     </div>
   </div>
+  
+  
   <!-- *** Subscribe *** -->
   <div class="subscribe">
     <div class="container">
