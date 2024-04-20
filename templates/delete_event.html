@@ -45,8 +45,8 @@
         <h1>Delete Event</h1>
         <!-- Form to delete event -->
         <form action="/delete_event" method="POST">
-            <label>Event ID:</label>
-            <input type="text" name="event_id">
+            <!-- Hidden input field to hold the event ID -->
+            <input type="hidden" name="event_id" value="{{ event_id }}">
             <button type="submit">Delete</button>
         </form>
     </div>
