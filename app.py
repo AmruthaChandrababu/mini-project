@@ -138,8 +138,7 @@ def event_details():
     scraped_data = collection.find_one({}, {'_id': 0})
 
     print("Scraped data:", scraped_data)  # Print scraped data for debugging
-     # Schedule the scraping and updating task to run every 60 seconds
-    schedule.every(60).seconds.do(event_details)
+    
 
     return render_template('event-details.html', scraped_data=scraped_data)
 
