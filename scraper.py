@@ -1,23 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_nit():
-    url = 'https://www.nitt.edu/home/academics/departments/meta/events/workshops/'
+def scrape_nitnagpur():
+    url = 'https://vnit.ac.in/category/events/'
     response = requests.get(url)
     if response.status_code == 200:
         text = response.content
         data = BeautifulSoup(text, 'html.parser')
-        events_container = data.find("div", id="contentcontainer")
-        if events_container:
-            event_elements = events_container.find_all("li")
-            event_text = [event.get_text(strip=True) for event in event_elements]
-            return event_text
-        else:
-            return "No events found on the page"
+        events = data.find_all(class_="entry-article-part entry-article-header")
+        event_list = []
+        for event in events:
+            results = event.find(class_="entry-title entry--item")
+            event_text = results.get_text()
+            cleaned_event = ' '.join(event_text.split())
+            event_list.append(cleaned_event)
+        return event_list
     else:
-        return "Failed to retrieve the webpage"
+        return []
 
-# Test the function
-events = scrape_nit()
+events = scrape_nitnagpur()
 for event in events:
-    print("Event name:", event)
+    print(event)
